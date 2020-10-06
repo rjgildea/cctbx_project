@@ -77,7 +77,7 @@ class CctbxPsanaEventProcessor(Processor):
     """
     self.parsed_params = parse(file_name='params.phil')
     dials_params = phil_scope.fetch(self.parsed_params).extract()
-    super(Processor, self).__init__(dials_params, output_tag)
+    super(CctbxPsanaEventProcessor, self).__init__(dials_params, output_tag)
     simple_script = SimpleScript(dials_params)
     simple_script.load_reference_geometry()
     self.reference_detector = simple_script.reference_detector
@@ -115,7 +115,7 @@ class CctbxPsanaEventProcessor(Processor):
     """
     experiments = self.experiments_from_event(event)
 
-    self.processor.process_experiments('%s_%s'%(self.output_tag, event_tag), experiments)
+    self.process_experiments('%s_%s'%(self.output_tag, event_tag), experiments)
 
   def experiments_from_event(self, event):
     """ Create an ExperimentList from a psana Event
@@ -132,6 +132,3 @@ class CctbxPsanaEventProcessor(Processor):
       experiment.detector = self.imageset.get_detector()
     return experiments
 
-  def finalize(self):
-    """ Write out final output if composite_mode is True, plus do any other final steps """
-    self.processor.finalize()

@@ -52,14 +52,14 @@ def full_api_example(experiment, run_number, detector_address, params_file, even
       experiments = processor.experiments_from_event(event)
       processor.setup_filenames(tag)
       try:
-        processor.preprocess(experiments)
+        processor.pre_process(experiments)
         observed = processor.find_spots(experiments)
         experiments, indexed = processor.index(experiments, observed)
         experiments, indexed = processor.refine(experiments, indexed)
         integrated = processor.integrate(experiments, indexed)
         print("Integrated %d spots on %d lattices"%(len(integrated), len(experiments)))
       except Exception as e:
-        print("Couldn't process event %d"%str(event_id), str(e))
+        print("Couldn't process event %d"%event_id, str(e))
       break
     break
   processor.finalize()
