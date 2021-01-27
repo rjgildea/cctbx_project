@@ -490,9 +490,16 @@ parallel {
 }
 """
 
+lunus_phil = """
+lunus {
+  deck_file = None
+    .type = path
+}
+"""
+
 master_phil = dispatch_phil + input_phil + tdata_phil + filter_phil + modify_phil + \
               select_phil + scaling_phil + postrefinement_phil + merging_phil + \
-              output_phil + statistics_phil + group_phil
+              output_phil + statistics_phil + group_phil + lunus_phil
 phil_scope = parse(master_phil)
 
 class Script(object):
